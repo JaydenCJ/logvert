@@ -1,0 +1,8 @@
+level=info msg="request served" ts=2026-07-12T10:00:00Z status=200 dur=15ms
+{"time":"2026-07-12T10:00:01.250Z","level":"warn","message":"cache miss","service":"api","pid":312,"key":"user:42"}
+<34>1 2026-07-12T10:00:02.003Z web1 nginx 4242 ID47 [origin ip="127.0.0.1"] upstream timed out
+Jul 12 10:00:03 web1 sshd[811]: Accepted publickey for deploy from 127.0.0.1 port 51022
+127.0.0.1 - alice [12/Jul/2026:10:00:04 +0000] "GET /api/v1/items?page=2 HTTP/1.1" 500 1834 "-" "curl/8.5.0"
+2026/07/12 10:00:05 [error] 4242#4242: *17 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: example.test, request: "GET /health HTTP/1.1"
+[Sun Jul 12 10:00:06.123456 2026] [proxy:error] [pid 951:tid 140] [client 127.0.0.1:52044] AH00898: Error reading from remote server
+PANIC: something totally unstructured happened

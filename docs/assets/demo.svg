@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="380" viewBox="0 0 760 380" font-family="Menlo, Consolas, monospace" font-size="13">
+  <rect width="760" height="380" rx="10" fill="#101418"/>
+  <circle cx="24" cy="22" r="6" fill="#ff5f56"/>
+  <circle cx="44" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="64" cy="22" r="6" fill="#27c93f"/>
+  <text x="380" y="27" fill="#8b949e" text-anchor="middle" font-size="12">logvert — mixed formats in, one normalized JSONL stream out</text>
+  <g fill="#c9d1d9">
+    <text x="24" y="60"><tspan fill="#7ee787">$</tspan> cat mixed.log   <tspan fill="#8b949e"># logfmt + JSON + syslog + access + error logs</tspan></text>
+    <text x="24" y="84" fill="#8b949e">level=info msg="request served" status=200 dur=15ms</text>
+    <text x="24" y="104" fill="#8b949e">Jul 12 10:00:03 web1 sshd[811]: Accepted publickey for deploy…</text>
+    <text x="24" y="124" fill="#8b949e">127.0.0.1 - alice [12/Jul/2026:10:00:04 +0000] "GET /api/v1/items…" 500 1834</text>
+    <text x="24" y="144" fill="#8b949e">2026/07/12 10:00:05 [error] 4242#4242: *17 connect() failed…, client: 127.0.0.1</text>
+    <text x="24" y="180"><tspan fill="#7ee787">$</tspan> cat mixed.log | logvert</text>
+    <text x="24" y="208">{"ts":"2026-07-12T10:00:00Z","level":<tspan fill="#7ee787">"info"</tspan>,"msg":"request served","source":<tspan fill="#79c0ff">"logfmt"</tspan>,…}</text>
+    <text x="24" y="232">{"ts":"2026-07-12T10:00:03Z","msg":"Accepted publickey…","app":"sshd","source":<tspan fill="#79c0ff">"syslog"</tspan>}</text>
+    <text x="24" y="256">{"ts":"2026-07-12T10:00:04Z","level":<tspan fill="#f778ba">"error"</tspan>,"msg":"GET /api/v1/items…","source":<tspan fill="#79c0ff">"access"</tspan>,…}</text>
+    <text x="24" y="280">{"ts":"2026-07-12T10:00:05Z","level":<tspan fill="#f778ba">"error"</tspan>,"msg":"connect() failed…","source":<tspan fill="#79c0ff">"nginx-error"</tspan>,…}</text>
+    <text x="24" y="316"><tspan fill="#7ee787">$</tspan> cat mixed.log | logvert --stats &gt;/dev/null</text>
+    <text x="24" y="340" fill="#d2a8ff">logvert: 8 lines in — json 1, syslog 2, nginx-error 1, apache-error 1, access 1, logfmt 1, raw 1</text>
+  </g>
+</svg>
